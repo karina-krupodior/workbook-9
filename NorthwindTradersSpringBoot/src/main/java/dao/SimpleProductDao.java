@@ -1,4 +1,6 @@
 package dao;
+
+
 import model.Product;
 import org.springframework.stereotype.Component;
 
@@ -7,16 +9,18 @@ import java.util.List;
 
 @Component
 public class SimpleProductDao implements ProductDao {
+
     private List<Product> products = new ArrayList<>();
+    private int nextId = 1;
 
     public SimpleProductDao() {
-        products.add(new Product(1, "Laptop", "Electronics", 1200.0));
-        products.add(new Product(2, "Phone", "Electronics", 800.0));
-        products.add(new Product(3, "Book", "Education", 20.0));
+        products.add(new Product(nextId++, "Milk", "Dairy", 2.5));
+        products.add(new Product(nextId++, "Bread", "Bakery", 1.0));
     }
 
     @Override
     public void add(Product product) {
+        product.setId(nextId++);
         products.add(product);
     }
 
